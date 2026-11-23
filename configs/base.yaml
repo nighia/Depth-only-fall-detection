@@ -1,0 +1,28 @@
+project:
+  name: monocular-depth-fall-detection
+  feature_schema_version: "0.2"
+  seed: 42
+video:
+  source_fps_fallback: 15
+depth:
+  weights: weights/yolo26n-depth.pt
+  device: auto            # 'auto' -> let Ultralytics choose
+  imgsz: 768              # released YOLO26-Depth weights are trained at 768
+  output_units: meters    # scale depends on calibration; see docs/05
+regions:
+  background_warmup_frames: 45
+  depth_difference_threshold: 0.05   # meters, absolute FLOOR
+  depth_difference_relative: 0.06    # fraction of background depth; noise grows with range
+  stable_relative: 0.05              # warm-up stability limit, fraction of range
+  min_area_pixels: 500
+  max_unstable_fraction: 0.02        # warn if warm-up scene was not static
+  stable_std_m: 0.05
+tracking:
+  iou_threshold: 0.20
+  max_missed_frames: 15
+  centroid_gate_factor: 0.5          # fallback match when boxes change shape (falls)
+features:
+  max_gap_s: 1.0                     # no rate features across larger gaps
+temporal:
+  window_seconds: 2.5
+  target_fps: 10

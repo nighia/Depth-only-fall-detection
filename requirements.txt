@@ -1,0 +1,12 @@
+
+numpy>=1.26
+opencv-python>=4.9
+PyYAML>=6.0
+pydantic>=2.6
+fastapi>=0.110
+uvicorn[standard]>=0.27
+torch>=2.2
+scikit-learn>=1.4
+pandas>=2.2
+pytest>=8.0
+ultralytics>=8.4.104  # first release with the YOLO26 Depth task
